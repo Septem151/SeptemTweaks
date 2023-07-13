@@ -6,23 +6,22 @@ import net.minecraft.item.ItemStack;
 
 public class SeptemCreativeTab extends CreativeTabs {
 
-    private static SeptemCreativeTab instance;
+  private static SeptemCreativeTab instance;
 
-    private SeptemCreativeTab() {
-        super("SeptemTweaks");
-    }
+  private SeptemCreativeTab() {
+    super("SeptemTweaks");
+  }
 
-    public static SeptemCreativeTab getInstance() {
-        if (instance == null) {
-            instance = new SeptemCreativeTab();
-        }
-        return instance;
+  public static SeptemCreativeTab getInstance() {
+    if (instance == null) {
+      instance = new SeptemCreativeTab();
     }
+    return instance;
+  }
 
-    @Override
-    public Item getTabIconItem() {
-        // TODO Auto-generated method stub
-        return new ItemStack(SeptemTweaks.itemAdamantiteIngot).getItem();
-    }
+  @Override
+  public Item getTabIconItem() {
+    return new ItemStack(Registrar.itemAdamantiteIngot).getItem();
+  }
 
 }
