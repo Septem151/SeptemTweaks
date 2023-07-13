@@ -1,7 +1,7 @@
 itemGroup.SeptemTweaks=Septem Tweaks
 
-tile.septemtweaks.oreAdamantite.name=Adamantite Ore
+tile.septemtweaks.adamantite_ore.name=Adamantite Ore
 
-item.septemtweaks.ingotAdamantite.name=Adamantite Ingot
-item.septemtweaks.pickaxeAdamantite.name=Adamantite Pickaxe
-item.septemtweaks.swordAdamantite.name=Adamantite Sword
+item.septemtweaks.adamantite_ingot.name=Adamantite Ingot
+item.septemtweaks.adamantite_pickaxe.name=Adamantite Pickaxe
+item.septemtweaks.adamantite_sword.name=Adamantite Sword
