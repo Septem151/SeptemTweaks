@@ -22,8 +22,8 @@ public class STWorldGen {
 
     private STWorldGen() {}
 
-    public static void init() {
-        registerWorldGen();
+    public static void preInit() {
+        // registerWorldGen();
     }
 
     private static void registerWorldGen() {

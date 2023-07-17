@@ -5,13 +5,14 @@ import net.minecraft.creativetab.CreativeTabs;
 import septem150.septemtweaks.SeptemCreativeTab;
 import septem150.septemtweaks.library.definition.EntryItem;
 
-public class ItemElementalIngot extends EntryItem {
+public class ItemElectrumCoil extends EntryItem {
 
-    public ItemElementalIngot(CreativeTabs creativeTab) {
-        super("elemental_ingot", creativeTab);
+    public ItemElectrumCoil(CreativeTabs creativeTab) {
+        super("electrum_coil", creativeTab);
     }
 
-    public ItemElementalIngot() {
+    public ItemElectrumCoil() {
         this(SeptemCreativeTab.getInstance());
     }
+
 }

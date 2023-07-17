@@ -34,4 +34,18 @@
  * For more details, see https://docs.gradle.org/8.0.1/userguide/java_library_plugin.html#sec:java_library_configurations_graph
  */
 dependencies {
+  devOnlyNonPublishable(rfg.deobf(project.files("libs/CoFHCore-[1.7.10]3.1.4-329.jar")))
+  devOnlyNonPublishable(rfg.deobf(project.files("libs/ThermalFoundation-[1.7.10]1.2.6-118.jar")))
+  devOnlyNonPublishable(rfg.deobf(project.files("libs/ThermalExpansion-[1.7.10]4.1.5-248.jar")))
+  devOnlyNonPublishable(rfg.deobf(project.files("libs/CodeChickenCore-1.1.11.jar")))
+  devOnlyNonPublishable(rfg.deobf(project.files("libs/1.7.10/CodeChickenLib-1.1.6.jar")))
+  devOnlyNonPublishable(rfg.deobf(project.files("libs/1.7.10/CodeChickenLib-1.1.8.jar")))
+  devOnlyNonPublishable(rfg.deobf(project.files("libs/NotEnoughItems-2.3.73-GTNH.jar")))
+  devOnlyNonPublishable(rfg.deobf(project.files("libs/neiaddons-1.12.14.40-mc1.7.10.jar")))
+  devOnlyNonPublishable(rfg.deobf(project.files("libs/NotEnoughResources-1.7.10-0.1.0-122.jar")))
+  devOnlyNonPublishable(rfg.deobf(project.files("libs/Waila-1.5.10_1.7.10.jar")))
+  devOnlyNonPublishable(rfg.deobf(project.files("libs/Wawla-1.0.5.120.jar")))
+  devOnlyNonPublishable(rfg.deobf(project.files("libs/CraftTweaker-1.7.10-3.0.13.jar")))
+  devOnlyNonPublishable(rfg.deobf(project.files("libs/ModTweaker2-0.9.6.jar")))
+
 }

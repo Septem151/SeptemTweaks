@@ -23,7 +23,7 @@ public class SeptemCreativeTab extends CreativeTabs {
 
     @Override
     public Item getTabIconItem() {
-        return new ItemStack(STItems.adamantitePickaxe).getItem();
+        return new ItemStack(STItems.electrumCoil).getItem();
     }
 
 }

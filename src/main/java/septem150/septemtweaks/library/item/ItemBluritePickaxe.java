@@ -2,6 +2,7 @@ package septem150.septemtweaks.library.item;
 
 import net.minecraft.creativetab.CreativeTabs;
 
+import septem150.septemtweaks.SeptemCreativeTab;
 import septem150.septemtweaks.library.definition.EntryPickaxe;
 import septem150.septemtweaks.library.material.MaterialBlurite;
 
@@ -12,6 +13,6 @@ public class ItemBluritePickaxe extends EntryPickaxe {
     }
 
     public ItemBluritePickaxe() {
-        this(null);
+        this(SeptemCreativeTab.getInstance());
     }
 }

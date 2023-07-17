@@ -37,8 +37,8 @@ public class STBlocks {
 
     private STBlocks() {}
 
-    public static void init() {
-        registerBlocks();
+    public static void preInit() {
+        // registerBlocks();
     }
 
     private static void registerBlocks() {

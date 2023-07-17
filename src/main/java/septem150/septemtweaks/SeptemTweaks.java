@@ -11,7 +11,13 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import septem150.septemtweaks.library.Librarian;
 
-@Mod(modid = Tags.MODID, version = Tags.VERSION, name = Tags.MODNAME, acceptedMinecraftVersions = "[1.7.10]")
+@Mod(
+    modid = Tags.MODID,
+    version = Tags.VERSION,
+    name = Tags.MODNAME,
+    acceptedMinecraftVersions = "[1.7.10]",
+    dependencies = "required-after:Forge@[10.13.4.1614,11.4);" + "required-after:ThermalFoundation@[1.7.10R1.2.6);"
+        + "required-after:ThermalExpansion@[1.7.10R4.1.5,);")
 public class SeptemTweaks {
 
     public static final Logger LOG = LogManager.getLogger(Tags.MODID);
@@ -25,7 +31,7 @@ public class SeptemTweaks {
     // GameRegistry." (Remove if not needed)
     public void preInit(FMLPreInitializationEvent event) {
         proxy.preInit(event);
-        Librarian.init();
+        Librarian.preInit();
     }
 
     @Mod.EventHandler
@@ -33,6 +39,7 @@ public class SeptemTweaks {
     // Register recipes." (Remove if not needed)
     public void init(FMLInitializationEvent event) {
         proxy.init(event);
+        Librarian.registerRecipes();
     }
 
     @Mod.EventHandler

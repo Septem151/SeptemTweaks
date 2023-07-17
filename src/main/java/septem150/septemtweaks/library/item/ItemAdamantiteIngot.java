@@ -2,6 +2,7 @@ package septem150.septemtweaks.library.item;
 
 import net.minecraft.creativetab.CreativeTabs;
 
+import septem150.septemtweaks.SeptemCreativeTab;
 import septem150.septemtweaks.library.definition.EntryItem;
 
 public class ItemAdamantiteIngot extends EntryItem {
@@ -11,6 +12,6 @@ public class ItemAdamantiteIngot extends EntryItem {
     }
 
     public ItemAdamantiteIngot() {
-        this(null);
+        this(SeptemCreativeTab.getInstance());
     }
 }

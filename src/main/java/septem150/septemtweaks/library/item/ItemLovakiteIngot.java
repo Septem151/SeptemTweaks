@@ -2,6 +2,7 @@ package septem150.septemtweaks.library.item;
 
 import net.minecraft.creativetab.CreativeTabs;
 
+import septem150.septemtweaks.SeptemCreativeTab;
 import septem150.septemtweaks.library.definition.EntryItem;
 
 public class ItemLovakiteIngot extends EntryItem {
@@ -11,6 +12,6 @@ public class ItemLovakiteIngot extends EntryItem {
     }
 
     public ItemLovakiteIngot() {
-        this(null);
+        this(SeptemCreativeTab.getInstance());
     }
 }
