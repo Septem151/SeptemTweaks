@@ -1,7 +1,24 @@
 itemGroup.SeptemTweaks=Septem Tweaks
 
 tile.septemtweaks.adamantite_ore.name=Adamantite Ore
+tile.septemtweaks.adamantite_block.name=Adamantite Block
+tile.septemtweaks.blurite_ore.name=Blurite Ore
+tile.septemtweaks.blurite_block.name=Blurite Block
+tile.septemtweaks.elemental_ore.name=Elemental Ore
+tile.septemtweaks.elemental_block.name=Elemental Block
+tile.septemtweaks.lovakite_ore.name=Lovakite Ore
+tile.septemtweaks.lovakite_block.name=Lovakite Block
+tile.septemtweaks.runite_ore.name=Runite Ore
+tile.septemtweaks.runite_block.name=Runite Block
 
 item.septemtweaks.adamantite_ingot.name=Adamantite Ingot
 item.septemtweaks.adamantite_pickaxe.name=Adamantite Pickaxe
 item.septemtweaks.adamantite_sword.name=Adamantite Sword
+item.septemtweaks.blurite_ingot.name=Blurite Ingot
+item.septemtweaks.blurite_pickaxe.name=Blurite Pickaxe
+item.septemtweaks.elemental_ingot.name=Elemental Ingot
+item.septemtweaks.elemental_pickaxe.name=Elemental Pickaxe
+item.septemtweaks.lovakite_ingot.name=Lovakite Ingot
+item.septemtweaks.lovakite_pickaxe.name=Lovakite Pickaxe
+item.septemtweaks.runite_ingot.name=Runite Ingot
+item.septemtweaks.runite_pickaxe.name=Runite Pickaxe

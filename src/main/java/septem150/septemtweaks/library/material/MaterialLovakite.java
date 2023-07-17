@@ -4,11 +4,11 @@ import net.minecraft.block.material.Material;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraftforge.common.util.EnumHelper;
 
-public class MaterialAdamantite {
+public class MaterialLovakite {
 
     public static final Material oreMaterial = Material.rock;
     public static final Material blockMaterial = Material.iron;
-    public static final ToolMaterial toolMaterial = EnumHelper.addToolMaterial("ADAMANTITE", 2, 832, 7.0F, 2.5F, 14);
+    public static final ToolMaterial toolMaterial = EnumHelper.addToolMaterial("LOVAKITE", 3, 2200, 4.0F, 4.0F, 10);
 
     // WOOD ( 0, 59, 2.0F, 0.0F, 15),
     // STONE ( 1, 131, 4.0F, 1.0F, 5 ),

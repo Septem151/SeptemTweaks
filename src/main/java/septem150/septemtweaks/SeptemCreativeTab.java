@@ -4,7 +4,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-import septem150.septemtweaks.library.Library;
+import septem150.septemtweaks.library.catalog.STItems;
 
 public class SeptemCreativeTab extends CreativeTabs {
 
@@ -23,7 +23,7 @@ public class SeptemCreativeTab extends CreativeTabs {
 
     @Override
     public Item getTabIconItem() {
-        return new ItemStack(Library.Items.adamantitePickaxe).getItem();
+        return new ItemStack(STItems.adamantitePickaxe).getItem();
     }
 
 }

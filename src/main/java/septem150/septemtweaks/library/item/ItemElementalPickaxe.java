@@ -1,0 +1,17 @@
+package septem150.septemtweaks.library.item;
+
+import net.minecraft.creativetab.CreativeTabs;
+
+import septem150.septemtweaks.library.definition.EntryPickaxe;
+import septem150.septemtweaks.library.material.MaterialElemental;
+
+public class ItemElementalPickaxe extends EntryPickaxe {
+
+    public ItemElementalPickaxe(CreativeTabs creativeTab) {
+        super("elemental_pickaxe", MaterialElemental.toolMaterial, creativeTab);
+    }
+
+    public ItemElementalPickaxe() {
+        this(null);
+    }
+}

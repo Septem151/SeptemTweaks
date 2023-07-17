@@ -5,15 +5,15 @@ import net.minecraft.creativetab.CreativeTabs;
 import septem150.septemtweaks.library.definition.EntryBlock;
 import septem150.septemtweaks.library.material.MaterialAdamantite;
 
-public class BlockAdamantiteOre extends EntryBlock {
+public class BlockAdamantiteBlock extends EntryBlock {
 
-    public BlockAdamantiteOre(CreativeTabs creativeTab) {
-        super("adamantite_ore", MaterialAdamantite.oreMaterial, creativeTab);
+    public BlockAdamantiteBlock(CreativeTabs creativeTab) {
+        super("adamantite_block", MaterialAdamantite.blockMaterial, creativeTab);
         this.setHardness(3.0F);
         this.setResistance(5.0F);
     }
 
-    public BlockAdamantiteOre() {
+    public BlockAdamantiteBlock() {
         this(null);
     }
 
