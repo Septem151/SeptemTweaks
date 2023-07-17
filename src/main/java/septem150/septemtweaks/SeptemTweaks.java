@@ -17,7 +17,8 @@ import septem150.septemtweaks.library.Librarian;
     name = Tags.MODNAME,
     acceptedMinecraftVersions = "[1.7.10]",
     dependencies = "required-after:Forge@[10.13.4.1614,11.4);" + "required-after:ThermalFoundation@[1.7.10R1.2.6);"
-        + "required-after:ThermalExpansion@[1.7.10R4.1.5,);")
+        + "required-after:ThermalExpansion@[1.7.10R4.1.5,);"
+        + "required-after:MineFactoryReloaded@[2.8.2B1-201,);")
 public class SeptemTweaks {
 
     public static final Logger LOG = LogManager.getLogger(Tags.MODID);
@@ -32,6 +33,7 @@ public class SeptemTweaks {
     public void preInit(FMLPreInitializationEvent event) {
         proxy.preInit(event);
         Librarian.preInit();
+
     }
 
     @Mod.EventHandler
@@ -39,7 +41,7 @@ public class SeptemTweaks {
     // Register recipes." (Remove if not needed)
     public void init(FMLInitializationEvent event) {
         proxy.init(event);
-        Librarian.registerRecipes();
+        Librarian.init();
     }
 
     @Mod.EventHandler
@@ -47,11 +49,13 @@ public class SeptemTweaks {
     // this." (Remove if not needed)
     public void postInit(FMLPostInitializationEvent event) {
         proxy.postInit(event);
+        Librarian.postInit();
     }
 
     @Mod.EventHandler
     // register server commands in this event handler (Remove if not needed)
     public void serverStarting(FMLServerStartingEvent event) {
         proxy.serverStarting(event);
+        Librarian.serverStarting();
     }
 }
