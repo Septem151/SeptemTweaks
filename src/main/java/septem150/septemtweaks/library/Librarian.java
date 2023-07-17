@@ -22,6 +22,14 @@ public class Librarian {
             new ShapedOreRecipe(
                 new ItemStack(STItems.electrumCoil),
                 new Object[] { "EEE", "ESE", "EEE", 'E', "ingotElectrum", 'S', Items.stick }));
+        GameRegistry.addRecipe(
+            new ShapedOreRecipe(
+                new ItemStack(STItems.goldCoil),
+                new Object[] { "GGG", "GSG", "GGG", 'G', "ingotGold", 'S', Items.stick }));
+        GameRegistry.addRecipe(
+            new ShapedOreRecipe(
+                new ItemStack(STItems.silverCoil),
+                new Object[] { "SSS", "SXS", "SSS", 'S', "ingotSilver", 'X', Items.stick }));
     }
 
 }

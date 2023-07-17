@@ -14,10 +14,12 @@ import septem150.septemtweaks.library.item.ItemBluritePickaxe;
 import septem150.septemtweaks.library.item.ItemElectrumCoil;
 import septem150.septemtweaks.library.item.ItemElementalIngot;
 import septem150.septemtweaks.library.item.ItemElementalPickaxe;
+import septem150.septemtweaks.library.item.ItemGoldCoil;
 import septem150.septemtweaks.library.item.ItemLovakiteIngot;
 import septem150.septemtweaks.library.item.ItemLovakitePickaxe;
 import septem150.septemtweaks.library.item.ItemRuniteIngot;
 import septem150.septemtweaks.library.item.ItemRunitePickaxe;
+import septem150.septemtweaks.library.item.ItemSilverCoil;
 
 public class STItems {
 
@@ -33,6 +35,8 @@ public class STItems {
     public static final ItemRuniteIngot runiteIngot = new ItemRuniteIngot();
     public static final ItemRunitePickaxe runitePickaxe = new ItemRunitePickaxe();
     public static final ItemElectrumCoil electrumCoil = new ItemElectrumCoil();
+    public static final ItemGoldCoil goldCoil = new ItemGoldCoil();
+    public static final ItemSilverCoil silverCoil = new ItemSilverCoil();
 
     private STItems() {}
 
@@ -55,7 +59,9 @@ public class STItems {
             // lovakitePickaxe,
             // runiteIngot,
             // runitePickaxe
-            electrumCoil);
+            electrumCoil,
+            goldCoil,
+            silverCoil);
         entries.sort(Comparator.comparing(RegistryEntry::getName));
         entries.forEach(entry -> entry.register());
     }
