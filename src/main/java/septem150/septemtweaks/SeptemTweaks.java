@@ -18,7 +18,13 @@ import septem150.septemtweaks.library.Librarian;
     acceptedMinecraftVersions = "[1.7.10]",
     dependencies = "required-after:Forge@[10.13.4.1614,11.4);" + "required-after:ThermalFoundation@[1.7.10R1.2.6);"
         + "required-after:ThermalExpansion@[1.7.10R4.1.5,);"
-        + "required-after:MineFactoryReloaded@[2.8.2B1-201,);")
+        + "required-after:MineFactoryReloaded@[2.8.2B1-201,);"
+        + "required-after:TConstruct@[1.7.10-1.8.8.build988,);"
+        + "required-after:claybucket@[1.2,);"
+        + "required-after:harvestcraft@[1.7.10j,);"
+        + "required-after:flintmod@[1.4,);"
+        + "required-after:chisel@[2.9.5.11,);"
+        + "after:harvestthenether@[1.7.10,);")
 public class SeptemTweaks {
 
     public static final Logger LOG = LogManager.getLogger(Tags.MODID);
