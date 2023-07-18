@@ -8,6 +8,7 @@ import java.util.List;
 import net.minecraft.creativetab.CreativeTabs;
 
 import septem150.septemtweaks.SeptemCreativeTab;
+import septem150.septemtweaks.api.RegistryEntry;
 import septem150.septemtweaks.library.block.BlockAdamantiteBlock;
 import septem150.septemtweaks.library.block.BlockAdamantiteOre;
 import septem150.septemtweaks.library.block.BlockBluriteBlock;
@@ -18,7 +19,6 @@ import septem150.septemtweaks.library.block.BlockLovakiteBlock;
 import septem150.septemtweaks.library.block.BlockLovakiteOre;
 import septem150.septemtweaks.library.block.BlockRuniteBlock;
 import septem150.septemtweaks.library.block.BlockRuniteOre;
-import septem150.septemtweaks.library.definition.RegistryEntry;
 
 public class STBlocks {
 

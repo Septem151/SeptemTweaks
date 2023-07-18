@@ -1,8 +1,8 @@
 package septem150.septemtweaks.library.worldgen;
 
+import septem150.septemtweaks.api.world.EntryWorldGen;
+import septem150.septemtweaks.api.world.WorldGenParams;
 import septem150.septemtweaks.library.catalog.STBlocks;
-import septem150.septemtweaks.library.definition.EntryWorldGen;
-import septem150.septemtweaks.library.definition.WorldGenParams;
 
 public class WorldGenBlurite extends EntryWorldGen {
 

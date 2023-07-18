@@ -1,4 +1,4 @@
-package septem150.septemtweaks.library.definition;
+package septem150.septemtweaks.api.item.tool;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemPickaxe;
@@ -6,6 +6,7 @@ import net.minecraft.item.ItemPickaxe;
 import cpw.mods.fml.common.registry.GameRegistry;
 import septem150.septemtweaks.SeptemTweaks;
 import septem150.septemtweaks.Tags;
+import septem150.septemtweaks.api.RegistryEntry;
 
 public abstract class EntryPickaxe extends ItemPickaxe implements RegistryEntry {
 

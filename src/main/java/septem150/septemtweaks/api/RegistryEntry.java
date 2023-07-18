@@ -1,4 +1,4 @@
-package septem150.septemtweaks.library.definition;
+package septem150.septemtweaks.api;
 
 public interface RegistryEntry {
 

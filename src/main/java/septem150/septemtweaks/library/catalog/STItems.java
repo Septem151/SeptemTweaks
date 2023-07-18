@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import septem150.septemtweaks.library.definition.RegistryEntry;
+import septem150.septemtweaks.api.RegistryEntry;
 import septem150.septemtweaks.library.item.ItemAdamantiteIngot;
 import septem150.septemtweaks.library.item.ItemAdamantitePickaxe;
 import septem150.septemtweaks.library.item.ItemAdamantiteSword;

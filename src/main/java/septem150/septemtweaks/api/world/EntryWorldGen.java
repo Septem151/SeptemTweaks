@@ -1,4 +1,4 @@
-package septem150.septemtweaks.library.definition;
+package septem150.septemtweaks.api.world;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,6 +12,7 @@ import net.minecraft.world.gen.feature.WorldGenMinable;
 import cpw.mods.fml.common.IWorldGenerator;
 import cpw.mods.fml.common.registry.GameRegistry;
 import septem150.septemtweaks.SeptemTweaks;
+import septem150.septemtweaks.api.RegistryEntry;
 
 public abstract class EntryWorldGen implements IWorldGenerator, RegistryEntry {
 

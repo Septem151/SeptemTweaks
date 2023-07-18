@@ -1,4 +1,4 @@
-package septem150.septemtweaks.library.definition;
+package septem150.septemtweaks.api.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -7,6 +7,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import cpw.mods.fml.common.registry.GameRegistry;
 import septem150.septemtweaks.SeptemTweaks;
 import septem150.septemtweaks.Tags;
+import septem150.septemtweaks.api.RegistryEntry;
 
 public abstract class EntryBlock extends Block implements RegistryEntry {
 

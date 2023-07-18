@@ -1,21 +1,22 @@
-package septem150.septemtweaks.library.definition;
+package septem150.septemtweaks.api.item.tool;
 
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.ItemSpade;
+import net.minecraft.item.ItemSword;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import septem150.septemtweaks.SeptemTweaks;
 import septem150.septemtweaks.Tags;
+import septem150.septemtweaks.api.RegistryEntry;
 
-public abstract class EntryShovel extends ItemSpade implements RegistryEntry {
+public abstract class EntrySword extends ItemSword implements RegistryEntry {
 
     private final String name;
 
-    public EntryShovel(String name, ToolMaterial material) {
+    public EntrySword(String name, ToolMaterial material) {
         this(name, material, null);
     }
 
-    public EntryShovel(String name, ToolMaterial material, CreativeTabs creativeTab) {
+    public EntrySword(String name, ToolMaterial material, CreativeTabs creativeTab) {
         super(material);
         this.name = name;
         this.setUnlocalizedName(String.format("%s.%s", Tags.MODID, name));

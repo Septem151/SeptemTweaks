@@ -3,7 +3,7 @@ package septem150.septemtweaks.library.item;
 import net.minecraft.creativetab.CreativeTabs;
 
 import septem150.septemtweaks.SeptemCreativeTab;
-import septem150.septemtweaks.library.definition.EntryItem;
+import septem150.septemtweaks.api.item.EntryItem;
 
 public class ItemElectrumCoil extends EntryItem {
 

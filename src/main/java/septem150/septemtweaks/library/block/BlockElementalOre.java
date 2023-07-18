@@ -2,7 +2,7 @@ package septem150.septemtweaks.library.block;
 
 import net.minecraft.creativetab.CreativeTabs;
 
-import septem150.septemtweaks.library.definition.EntryBlock;
+import septem150.septemtweaks.api.block.EntryBlock;
 import septem150.septemtweaks.library.material.MaterialElemental;
 
 public class BlockElementalOre extends EntryBlock {

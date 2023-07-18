@@ -1,4 +1,4 @@
-package septem150.septemtweaks.library.definition;
+package septem150.septemtweaks.api.world;
 
 import net.minecraft.block.Block;
 

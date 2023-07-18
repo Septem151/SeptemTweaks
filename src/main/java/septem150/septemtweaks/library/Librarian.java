@@ -1,21 +1,21 @@
 package septem150.septemtweaks.library;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
+
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.GameRegistry.UniqueIdentifier;
 import septem150.septemtweaks.SeptemTweaks;
 import septem150.septemtweaks.library.catalog.STBlocks;
 import septem150.septemtweaks.library.catalog.STItems;
@@ -83,118 +83,142 @@ public class Librarian {
                 conductanceCoil,
                 new Object[] { true, "  R", " C ", "R  ", 'R', "dustRedstone", 'C', STItems.electrumCoil }));
 
-        List<String> foodOreTypes = Arrays.asList(
-            "fishraw",
-            "meatraw",
-            "veggie",
-            "fruit",
-            "seed",
-            "milk",
-            "egg",
-            "mushroom",
-            "heavycream",
-            "sugar",
-            "nut",
-            "spice",
-            "pepper",
-            "herb",
-            "berry",
-            "grain");
-        List<ItemStack> foodstuffs = new ArrayList<>();
-        for (String foodOreType : foodOreTypes) {
-            foodstuffs.addAll(OreDictionary.getOres("listAll" + foodOreType));
-        }
-
-        SeptemTweaks.LOG.info("SEPTEMTWEAKS");
-        for (ItemStack item : foodstuffs) {
-            SeptemTweaks.LOG.info(item.toString());
-        }
-
+        List<ItemStack> whitelistSmeltingItems = new ArrayList<ItemStack>();
+        Collections.addAll(
+            whitelistSmeltingItems,
+            new ItemStack(Blocks.cobblestone),
+            new ItemStack(Blocks.stone),
+            new ItemStack(Blocks.sand),
+            new ItemStack(Blocks.log),
+            new ItemStack(Blocks.log2),
+            new ItemStack(Blocks.cactus),
+            new ItemStack(Blocks.stonebrick),
+            new ItemStack(Blocks.gravel),
+            new ItemStack(Blocks.brown_mushroom),
+            new ItemStack(Blocks.clay),
+            new ItemStack(Blocks.red_mushroom),
+            new ItemStack(Items.pumpkin_seeds),
+            new ItemStack(Items.clay_ball),
+            new ItemStack(Items.bread),
+            new ItemStack(Items.sugar),
+            new ItemStack(Items.beef),
+            new ItemStack(Items.chicken),
+            new ItemStack(Items.porkchop),
+            new ItemStack(Items.potato),
+            new ItemStack(Items.fish),
+            new ItemStack(Items.fish, 1, 1),
+            GameRegistry.findItemStack("MineFactoryReloaded", "stone", 1),
+            GameRegistry.findItemStack("MineFactoryReloaded", "rubber.raw", 1),
+            GameRegistry.findItemStack("MineFactoryReloaded", "meat.nugget.raw", 1),
+            GameRegistry.findItemStack("MineFactoryReloaded", "plastic.sheet", 1),
+            GameRegistry.findItemStack("MineFactoryReloaded", "meat.ingot.raw", 1),
+            GameRegistry.findItemStack("MineFactoryReloaded", "rubberwood.log", 1),
+            new ItemStack(GameRegistry.findBlock("MineFactoryReloaded", "stone")),
+            new ItemStack(GameRegistry.findBlock("MineFactoryReloaded", "stone"), 1, 1),
+            new ItemStack(GameRegistry.findBlock("MineFactoryReloaded", "stone"), 1, 2),
+            new ItemStack(GameRegistry.findBlock("MineFactoryReloaded", "stone"), 1, 3),
+            new ItemStack(GameRegistry.findBlock("MineFactoryReloaded", "brick"), 1, 13),
+            new ItemStack(GameRegistry.findBlock("TConstruct", "CraftedSoil")),
+            new ItemStack(GameRegistry.findBlock("TConstruct", "CraftedSoil"), 1, 1),
+            new ItemStack(GameRegistry.findBlock("TConstruct", "CraftedSoil"), 1, 2),
+            new ItemStack(GameRegistry.findBlock("TConstruct", "CraftedSoil"), 1, 3),
+            new ItemStack(GameRegistry.findBlock("TConstruct", "CraftedSoil"), 1, 6),
+            new ItemStack(GameRegistry.findBlock("TConstruct", "materials"), 1, 36),
+            GameRegistry.findItemStack("MineFactoryReloaded", "pinkslime.block", 1),
+            GameRegistry.findItemStack("TConstruct", "SpeedBlock", 1));
         Map<ItemStack, ItemStack> smeltingList = FurnaceRecipes.smelting()
             .getSmeltingList();
-        SeptemTweaks.LOG.info("Length: " + smeltingList.size());
         for (Iterator<Map.Entry<ItemStack, ItemStack>> entries = smeltingList.entrySet()
             .iterator(); entries.hasNext();) {
             Map.Entry<ItemStack, ItemStack> entry = entries.next();
             ItemStack inputItem = entry.getKey();
-            boolean isFood = false;
-            for (ItemStack foodItem : foodstuffs) {
-                // Pam's Fix
-                if (inputItem.getItemDamage() == 32767) {
-                    inputItem.setItemDamage(0);
-                }
-                if (ItemStack.areItemStacksEqual(foodItem, inputItem)) {
-                    isFood = true;
+            UniqueIdentifier blockData = GameRegistry.findUniqueIdentifierFor(inputItem.getItem());
+            String modId = blockData.modId;
+            String itemName = blockData.name;
+            if (modId.equals("harvestcraft") || modId.equals("claybucket")) {
+                continue;
+            }
+            boolean isWhitelisted = false;
+            for (ItemStack whitelistItem : whitelistSmeltingItems) {
+                if (OreDictionary.itemMatches(inputItem, whitelistItem, false)) {
+                    isWhitelisted = true;
                     break;
                 }
             }
-            if (!isFood) {
+            if (!isWhitelisted) {
                 entries.remove();
-                SeptemTweaks.LOG.info("Removing Smelting Recipe for: " + inputItem.getUnlocalizedName());
+                SeptemTweaks.LOG.info(
+                    String.format("Removing Smelting Recipe for %s:%s:%d", modId, itemName, inputItem.getItemDamage()));
             }
         }
 
-        class OreSmelt {
+        Librarian.addOreDictSmelting("logWood", new ItemStack(Items.coal, 1, 1), 1.0F);
+        Librarian.addOreDictSmelting("woodRubber", new ItemStack(Items.coal, 1, 1), 1.0F);
+    }
 
-            protected final List<ItemStack> inputs;
-            protected final ItemStack result;
-            protected final float exp;
-
-            public OreSmelt(String oreDict, ItemStack result, float exp) {
-                this(OreDictionary.getOres(oreDict), result, exp);
-            }
-
-            public OreSmelt(ItemStack input, ItemStack result, float exp) {
-                this(Arrays.asList(input), result, exp);
-            }
-
-            public OreSmelt(Item input, ItemStack result, float exp) {
-                this(new ItemStack(input), result, exp);
-            }
-
-            public OreSmelt(List<ItemStack> inputs, ItemStack result, float exp) {
-                this.inputs = inputs;
-                this.result = result;
-                this.exp = exp;
-            }
-        }
-
-        // take out fish
-
-        List<OreSmelt> oreDicts = new ArrayList<>();
-        Collections.addAll(
-            oreDicts,
-            new OreSmelt("logWood", new ItemStack(Items.coal, 1, 1), 0.1F),
-            new OreSmelt("woodRubber", new ItemStack(Items.coal, 1, 1), 0.1F),
-            new OreSmelt("sand", new ItemStack(Blocks.glass, 1), 0.1F),
-            new OreSmelt(new ItemStack(Items.fish, 1, 1), new ItemStack(Items.cooked_fished, 1, 1), 0.1F),
-            new OreSmelt(Items.fish, new ItemStack(Items.cooked_fished), 0.1F),
-            new OreSmelt(Items.clay_ball, new ItemStack(Items.brick, 1), 0.1F),
-            new OreSmelt(
-                GameRegistry.findItem("claybucket", "unfiredClaybucket"),
-                GameRegistry.findItemStack("claybucket", "claybucket", 1),
-                0.1F),
-            new OreSmelt(
-                new ItemStack(GameRegistry.findBlock("TConstruct", "CraftedSoil"), 1, 1),
-                new ItemStack(GameRegistry.findItem("TConstruct", "materials"), 1, 2),
-                0.1F),
-            new OreSmelt(new ItemStack(Blocks.cobblestone), new ItemStack(Blocks.stone, 1), 0.1F),
-            new OreSmelt(
-                GameRegistry.findItem("MineFactoryReloaded", "meat.nugget.raw"),
-                new ItemStack(GameRegistry.findItem("MineFactoryReloaded", "meat.nugget.cooked")),
-                0.1F),
-            new OreSmelt(
-                new ItemStack(Blocks.gravel),
-                new ItemStack(GameRegistry.findBlock("chisel", "concrete"), 1, 0),
-                0.1F),
-            new OreSmelt(
-                GameRegistry.findItem("harvestcraft", "coffeebeanItem"),
-                new ItemStack(GameRegistry.findItem("harvestcraft", "coffeeItem")),
-                0.1F));
-        for (OreSmelt smeltInfo : oreDicts) {
-            for (ItemStack oreStack : smeltInfo.inputs) {
-                GameRegistry.addSmelting(oreStack, smeltInfo.result, smeltInfo.exp);
-            }
+    private static void addOreDictSmelting(String oreDict, ItemStack result, float exp) {
+        List<ItemStack> inputItems = OreDictionary.getOres(oreDict);
+        for (ItemStack inputItem : inputItems) {
+            GameRegistry.addSmelting(inputItem, result, exp);
         }
     }
+
+    private static void addSmelting(ItemStack input, ItemStack result, float exp) {
+        GameRegistry.addSmelting(input, result, exp);
+    }
+
+    private static void addModSmelting(String inputName, ItemStack result, float exp) {
+        String[] nameInfo = inputName.split(":");
+        String modId = nameInfo[0];
+        String itemName = nameInfo[1];
+        int metadata = OreDictionary.WILDCARD_VALUE;
+        if (nameInfo.length > 2) {
+            metadata = Integer.valueOf(nameInfo[2]);
+        }
+        ItemStack input = GameRegistry.findItemStack(modId, itemName, 1);
+        if (input != null) {
+            input.setItemDamage(metadata);
+            GameRegistry.addSmelting(input, result, exp);
+        } else {
+            SeptemTweaks.LOG
+                .error("[SEPTEMTWEAKS]: Attempted to register smelting recipe with null input item: " + inputName);
+            SeptemTweaks.LOG.error("[SEPTEMTWEAKS]: Could not find ItemStack for " + inputName);
+        }
+    }
+
+    private static void addModSmelting(String inputName, ItemStack result) {
+        Librarian.addModSmelting(inputName, result, 0);
+    }
+
+    private static void addModSmelting(String inputName, String resultName, int quantity, float exp) {
+        String[] nameInfo = resultName.split(":");
+        String modId = nameInfo[0];
+        String itemName = nameInfo[1];
+        int metadata = 0;
+        if (nameInfo.length > 2) {
+            metadata = Integer.valueOf(nameInfo[2]);
+        }
+        ItemStack result = GameRegistry.findItemStack(modId, itemName, quantity);
+        if (result != null) {
+            result.setItemDamage(metadata);
+            Librarian.addModSmelting(inputName, result, exp);
+        } else {
+            SeptemTweaks.LOG
+                .error("[SEPTEMTWEAKS]: Attempted to register smelting recipe with null output item: " + resultName);
+            SeptemTweaks.LOG.error("[SEPTEMTWEAKS]: Could not find ItemStack for " + resultName);
+        }
+    }
+
+    private static void addModSmelting(String inputName, String resultName, int quantity) {
+        Librarian.addModSmelting(inputName, resultName, quantity, 0.0F);
+    }
+
+    private static void addModSmelting(String inputName, String resultName, float exp) {
+        Librarian.addModSmelting(inputName, resultName, 1, exp);
+    }
+
+    private static void addModSmelting(String inputName, String resultName) {
+        Librarian.addModSmelting(inputName, resultName, 1, 0.0F);
+    }
+
 }
