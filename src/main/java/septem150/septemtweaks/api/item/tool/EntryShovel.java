@@ -32,7 +32,8 @@ public abstract class EntryShovel extends ItemSpade implements RegistryEntry {
     @Override
     public void register() {
         if (this.getCreativeTab() == null) {
-            SeptemTweaks.LOG.warn(String.format("%s was registered without a creative tab!"), this.name);
+            SeptemTweaks.LOG
+                .warn(String.format("[SeptemTweaks]: %s was registered without a creative tab!"), this.name);
 
         }
         GameRegistry.registerItem(this, name);

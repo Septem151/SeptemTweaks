@@ -4,7 +4,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-import septem150.septemtweaks.library.catalog.STItems;
+import septem150.septemtweaks.item.STItems;
 
 public class SeptemCreativeTab extends CreativeTabs {
 

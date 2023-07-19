@@ -8,6 +8,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import septem150.septemtweaks.SeptemTweaks;
 import septem150.septemtweaks.Tags;
 import septem150.septemtweaks.api.RegistryEntry;
+import septem150.septemtweaks.util.ItemWrapper;
 
 public abstract class EntryBlock extends Block implements RegistryEntry {
 
@@ -25,6 +26,10 @@ public abstract class EntryBlock extends Block implements RegistryEntry {
         this.setCreativeTab(creativeTab);
     }
 
+    public ItemWrapper wrapped() {
+        return new ItemWrapper(this);
+    }
+
     @Override
     public String getName() {
         return name;
@@ -33,7 +38,8 @@ public abstract class EntryBlock extends Block implements RegistryEntry {
     @Override
     public void register() {
         if (this.getCreativeTabToDisplayOn() == null) {
-            SeptemTweaks.LOG.warn(String.format("%s was registered without a creative tab!"), this.name);
+            SeptemTweaks.LOG
+                .warn(String.format("[SeptemTweaks]: %s was registered without a creative tab!"), this.name);
         }
         GameRegistry.registerBlock(this, name);
     }

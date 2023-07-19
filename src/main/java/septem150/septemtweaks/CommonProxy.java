@@ -12,9 +12,6 @@ public class CommonProxy {
     // GameRegistry." (Remove if not needed)
     public void preInit(FMLPreInitializationEvent event) {
         Config.synchronizeConfiguration(event.getSuggestedConfigurationFile());
-
-        SeptemTweaks.LOG.info(Config.greeting);
-        SeptemTweaks.LOG.info("I am " + Tags.MODNAME + " at version " + Tags.VERSION);
     }
 
     // load "Do your mod setup. Build whatever data structures you care about.

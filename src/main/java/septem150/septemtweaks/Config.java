@@ -6,12 +6,15 @@ import net.minecraftforge.common.config.Configuration;
 
 public class Config {
 
-    public static String greeting = "Hello World";
+    public static boolean genOres = false;
 
     public static void synchronizeConfiguration(File configFile) {
         Configuration configuration = new Configuration(configFile);
 
-        greeting = configuration.getString("greeting", Configuration.CATEGORY_GENERAL, greeting, "How shall I greet?");
+        String comment;
+
+        comment = "Whether or not to generate this mod's ores. [default: true]";
+        genOres = configuration.getBoolean("genOres", Configuration.CATEGORY_GENERAL, genOres, comment);
 
         if (configuration.hasChanged()) {
             configuration.save();

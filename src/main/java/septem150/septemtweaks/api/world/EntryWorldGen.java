@@ -13,6 +13,7 @@ import cpw.mods.fml.common.IWorldGenerator;
 import cpw.mods.fml.common.registry.GameRegistry;
 import septem150.septemtweaks.SeptemTweaks;
 import septem150.septemtweaks.api.RegistryEntry;
+import septem150.septemtweaks.world.WorldGenParams;
 
 public abstract class EntryWorldGen implements IWorldGenerator, RegistryEntry {
 
@@ -51,8 +52,8 @@ public abstract class EntryWorldGen implements IWorldGenerator, RegistryEntry {
             WorldGenParams dimensionParams = this.genParams.get(dimensionId);
             this.generateBlock(world, rand, chunkX, chunkZ, dimensionParams);
         } else {
-            SeptemTweaks.LOG
-                .error(String.format("Dimension %d was not loaded for %s WorldGen!", dimensionId, this.name));
+            SeptemTweaks.LOG.error(
+                String.format("[SeptemTweaks]: Dimension %d was not loaded for %s WorldGen!", dimensionId, this.name));
         }
     }
 
@@ -65,8 +66,6 @@ public abstract class EntryWorldGen implements IWorldGenerator, RegistryEntry {
             int yRand = rand.nextInt(heightRange) + params.minY;
             int zRand = chunkZ * 16 + rand.nextInt(16);
             oreGen.generate(world, rand, xRand, yRand, zRand);
-            SeptemTweaks.LOG.info(
-                String.format("Generated %s at X=%d, Z=%d, Y=%d", this.block.getLocalizedName(), xRand, zRand, yRand));
         }
     }
 }
