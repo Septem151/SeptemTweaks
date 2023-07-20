@@ -13,7 +13,7 @@ public class Config {
 
         String comment;
 
-        comment = "Whether or not to generate this mod's ores. [default: true]";
+        comment = "Whether or not to generate this mod's ores.";
         genOres = configuration.getBoolean("genOres", Configuration.CATEGORY_GENERAL, genOres, comment);
 
         if (configuration.hasChanged()) {

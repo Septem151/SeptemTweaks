@@ -40,12 +40,21 @@ public class CraftManager {
         return CraftManager.instance;
     }
 
+    public void replaceRecipes(ItemWrapper result, Object... recipe) {
+        this.addBlacklistedResult(result);
+        this.addRecipe(result, recipe);
+    }
+
     public void addRecipe(ItemWrapper result, Object... recipe) {
         this.additionalRecipes.add(new ShapedOreRecipe(result.itemStack, recipe));
     }
 
     public void addShapelessRecipe(ItemWrapper result, Object... recipe) {
         this.additionalRecipes.add(new ShapelessOreRecipe(result.itemStack, recipe));
+    }
+
+    public void addRecipe(IRecipe recipe) {
+        this.additionalRecipes.add(recipe);
     }
 
     public void addBlacklistedMod(String modId) {

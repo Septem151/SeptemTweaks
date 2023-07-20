@@ -12,7 +12,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import septem150.septemtweaks.block.STBlocks;
 import septem150.septemtweaks.item.STItems;
-import septem150.septemtweaks.recipe.RecipeManager;
+import septem150.septemtweaks.recipe.STRecipes;
 import septem150.septemtweaks.world.STWorldGen;
 
 @Mod(
@@ -27,12 +27,11 @@ import septem150.septemtweaks.world.STWorldGen;
         + "required-after:claybucket@[1.2);"
         + "required-after:harvestcraft@[1.7.10j);"
         + "required-after:flintmod@[1.4);"
-        + "required-after:chisel@[2.9.5.11);"
+        + "required-after:extrautilities@[1.2.12);"
         + "after:harvestthenether@[1.7.10);")
 public class SeptemTweaks {
 
     public static final Logger LOG = LogManager.getLogger(Tags.MODID);
-    public static final RecipeManager recipeManager = RecipeManager.getInstance();
 
     @SidedProxy(clientSide = "septem150.septemtweaks.ClientProxy", serverSide = "septem150.septemtweaks.CommonProxy")
     public static CommonProxy proxy;
@@ -56,7 +55,6 @@ public class SeptemTweaks {
     // Register recipes." (Remove if not needed)
     public void init(FMLInitializationEvent event) {
         proxy.init(event);
-        recipeManager.initRecipes();
         SeptemTweaks.LOG.info("[SeptemTweaks]: Init Complete.");
     }
 
@@ -65,12 +63,13 @@ public class SeptemTweaks {
     // this." (Remove if not needed)
     public void postInit(FMLPostInitializationEvent event) {
         proxy.postInit(event);
+        STRecipes.initRecipes();
         SeptemTweaks.LOG.info("[SeptemTweaks]: PostInit Complete.");
     }
 
     @Mod.EventHandler
     public void loadComplete(FMLLoadCompleteEvent event) {
-        recipeManager.registerRecipes();
+        STRecipes.registerRecipes();
         SeptemTweaks.LOG.info("[SeptemTweaks]: Load Complete.");
     }
 
