@@ -1,13 +1,14 @@
-# Example Forge Mod for Minecraft 1.7.10
+# SeptemTweaks Mod for Minecraft 1.7.10
 
-[![](https://jitpack.io/v/GTNewHorizons/ExampleMod1.7.10.svg)](https://jitpack.io/#GTNewHorizons/ExampleMod1.7.10)
-[![](https://github.com/GTNewHorizons/ExampleMod1.7.10/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/GTNewHorizons/ExampleMod1.7.10/actions/workflows/build-and-test.yml)
+<!-- [![](https://jitpack.io/v/GTNewHorizons/ExampleMod1.7.10.svg)](https://jitpack.io/#GTNewHorizons/ExampleMod1.7.10) -->
 
-An example mod for Minecraft 1.7.10 with Forge focussed on a stable, updatable setup.
+[![](https://github.com/Septem151/SeptemTweaks/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/Septem151/SeptemTweaks/actions/workflows/build-and-test.yml)
 
-### Motivation
+A mod for Minecraft 1.7.10 with Forge that modifies certain aspects of the game to my liking, primarily for use in the SeptemCraft modpack (not released yet).
 
-We had our fair share in struggles with build scripts for Minecraft Forge. There are quite a few pitfalls from non-obvious error messages. This Example Project provides you a build system you can adapt to over 90% of Minecraft Forge mods and can easily be updated if need be.
+Built on top of the [GTNH Example Mod for 1.7.10](https://github.com/GTNewHorizons/ExampleMod1.7.10)
+
+Information related to the GTNH Example Mod setup is in the sections below.
 
 ### Help! I'm stuck!
 
@@ -16,6 +17,7 @@ We all have been there! Check out our [FAQ](https://github.com/GTNewHorizons/Exa
 ### Getting started
 
 Creating mod from scratch:
+
 1. Unzip [project starter](https://github.com/GTNewHorizons/ExampleMod1.7.10/releases/download/master-packages/starter.zip) into project directory.
 2. Replace placeholders in LICENSE-template and rename it to LICENSE, or remove LICENSE-template and put any other license you like on your code. This is an permissive OSS project and we encourage you participate in OSS movement by having permissive license like one in template. You can find out pros and cons of OSS software in [this article](https://www.freecodecamp.org/news/what-is-great-about-developing-open-source-and-what-is-not/)
 3. Ensure your project is under VCS. For example initialise git repository by running `git init; git commit --message "initialized repository"`.
@@ -28,28 +30,29 @@ We also have described guidelines for existing mod [migration](docs/migration.md
 
 ### Features
 
- - Updatable: Replace [`build.gradle`](https://github.com/GTNewHorizons/ExampleMod1.7.10/blob/main/build.gradle) with a newer version
- - Optional API artifact (.jar)
- - Optional version replacement in Java files
- - Optional shadowing of dependencies
- - Simplified setup of Mixin and example
- - Scala support (add sources under `src/main/scala/` instead of `src/main/java/`)
- - Optional named developer account for consistent player progression during testing
- - Boilerplate forge mod as starting point
- - Improved warnings for pitfalls
- - Git Tags integration for versioning
- - [Jitpack](https://jitpack.io) CI
- - GitHub CI:
-   - Releasing your artifacts on new tags pushed. Push git tag named after version (e.g. 1.0.0) which will trigger a release of artifacts with according names.
-   - Running smoke test for server startup. On any server crash occurring workflow will fail and print the crash log.
+- Updatable: Replace [`build.gradle`](https://github.com/GTNewHorizons/ExampleMod1.7.10/blob/main/build.gradle) with a newer version
+- Optional API artifact (.jar)
+- Optional version replacement in Java files
+- Optional shadowing of dependencies
+- Simplified setup of Mixin and example
+- Scala support (add sources under `src/main/scala/` instead of `src/main/java/`)
+- Optional named developer account for consistent player progression during testing
+- Boilerplate forge mod as starting point
+- Improved warnings for pitfalls
+- Git Tags integration for versioning
+- [Jitpack](https://jitpack.io) CI
+- GitHub CI:
+  - Releasing your artifacts on new tags pushed. Push git tag named after version (e.g. 1.0.0) which will trigger a release of artifacts with according names.
+  - Running smoke test for server startup. On any server crash occurring workflow will fail and print the crash log.
 
 ### Files
- - [`build.gradle`](https://github.com/GTNewHorizons/ExampleMod1.7.10/blob/main/build.gradle): This is the core script of the build process. You should not need to tamper with it, unless you are trying to accomplish something out of the ordinary. __Do not touch this file! You will make a future update near impossible if you do so!__
- - [`gradle.properties`](https://github.com/GTNewHorizons/ExampleMod1.7.10/blob/main/gradle.properties): The core configuration file. It includes
- - [`dependencies.gradle[.kts]`](https://github.com/GTNewHorizons/ExampleMod1.7.10/blob/main/dependencies.gradle): Add your mod's dependencies in this file. This is separate from the main build script, so you may replace the [`build.gradle`](https://github.com/SinTh0r4s/ExampleMod1.7.10/blob/main/build.gradle) if an update is available.
- - [`repositories.gradle[.kts]`](https://github.com/GTNewHorizons/ExampleMod1.7.10/blob/main/repositories.gradle): Add your dependencies' repositories. This is separate from the main build script, so you may replace the [`build.gradle`](https://github.com/SinTh0r4s/ExampleMod1.7.10/blob/main/build.gradle) if an update is available.
- - [`jitpack.yml`](https://github.com/GTNewHorizons/ExampleMod1.7.10/blob/main/jitpack.yml): Ensures that your mod is available as import over [Jitpack](https://jitpack.io).
- - [`.github/workflows/gradle.yml`](https://github.com/GTNewHorizons/ExampleMod1.7.10/blob/main/.github/workflows/gradle.yml): A simple CI script that will build your mod any time it is pushed to `master` or `main` and publish the result as release in your repository. This feature is free with GitHub if your repository is public.
+
+- [`build.gradle`](https://github.com/GTNewHorizons/ExampleMod1.7.10/blob/main/build.gradle): This is the core script of the build process. You should not need to tamper with it, unless you are trying to accomplish something out of the ordinary. **Do not touch this file! You will make a future update near impossible if you do so!**
+- [`gradle.properties`](https://github.com/GTNewHorizons/ExampleMod1.7.10/blob/main/gradle.properties): The core configuration file. It includes
+- [`dependencies.gradle[.kts]`](https://github.com/GTNewHorizons/ExampleMod1.7.10/blob/main/dependencies.gradle): Add your mod's dependencies in this file. This is separate from the main build script, so you may replace the [`build.gradle`](https://github.com/SinTh0r4s/ExampleMod1.7.10/blob/main/build.gradle) if an update is available.
+- [`repositories.gradle[.kts]`](https://github.com/GTNewHorizons/ExampleMod1.7.10/blob/main/repositories.gradle): Add your dependencies' repositories. This is separate from the main build script, so you may replace the [`build.gradle`](https://github.com/SinTh0r4s/ExampleMod1.7.10/blob/main/build.gradle) if an update is available.
+- [`jitpack.yml`](https://github.com/GTNewHorizons/ExampleMod1.7.10/blob/main/jitpack.yml): Ensures that your mod is available as import over [Jitpack](https://jitpack.io).
+- [`.github/workflows/gradle.yml`](https://github.com/GTNewHorizons/ExampleMod1.7.10/blob/main/.github/workflows/gradle.yml): A simple CI script that will build your mod any time it is pushed to `master` or `main` and publish the result as release in your repository. This feature is free with GitHub if your repository is public.
 
 ### Forge's Access Transformers
 
@@ -57,7 +60,7 @@ You may activate Forge's Access Transformers by defining a configuration file in
 
 Check out the [`example-access-transformers`](https://github.com/GTNewHorizons/ExampleMod1.7.10/tree/example-access-transformers) brach for a working example!
 
-__Warning:__ Access Transformers are bugged and will deny you any sources for the decompiled minecraft! Your development environment will still work, but you might face some inconveniences. For example, IntelliJ will not permit searches in dependencies without attached sources.
+**Warning:** Access Transformers are bugged and will deny you any sources for the decompiled minecraft! Your development environment will still work, but you might face some inconveniences. For example, IntelliJ will not permit searches in dependencies without attached sources.
 
 ### Mixins
 
