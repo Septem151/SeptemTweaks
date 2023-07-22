@@ -12,6 +12,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import septem150.septemtweaks.block.STBlocks;
 import septem150.septemtweaks.item.STItems;
+import septem150.septemtweaks.material.MaterialManager;
 import septem150.septemtweaks.recipe.STRecipes;
 import septem150.septemtweaks.world.STWorldGen;
 
@@ -24,11 +25,21 @@ import septem150.septemtweaks.world.STWorldGen;
         + "required-after:ThermalExpansion@[1.7.10R4.1.5);"
         + "required-after:MineFactoryReloaded@[2.8.2B1-201);"
         + "required-after:TConstruct@[1.7.10-1.8.8.build988);"
-        + "required-after:claybucket@[1.2);"
+        + "required-after:BuildCraft@[7.1.23);"
+        + "required-after:BuildCraft|Compat@[7.1.7);"
+        + "required-after:Chisel@[2.9.5.11,);"
         + "required-after:harvestcraft@[1.7.10j);"
         + "required-after:flintmod@[1.4);"
         + "required-after:extrautilities@[1.2.12);"
-        + "after:harvestthenether@[1.7.10);")
+        + "required-after:BiomesOPlenty@[2.1.0.1189);"
+        + "required-after:NetherOres@[2.3.1-22);"
+        + "required-after:appliedenergistics2@[rv3-beta-6);"
+        + "required-after:CraftTweaker@[3.0.13);"
+        + "required-after:ModTweaker2@[0.9.6);"
+        + "after:harvestthenether@[1.7.10);"
+        + "after:ClayBucket@[1.2);"
+        + "after:currency@[1.2);"
+        + "after:UniDict@[2.9.2);")
 public class SeptemTweaks {
 
     public static final Logger LOG = LogManager.getLogger(Tags.MODID);
@@ -70,6 +81,7 @@ public class SeptemTweaks {
     @Mod.EventHandler
     public void loadComplete(FMLLoadCompleteEvent event) {
         STRecipes.registerRecipes();
+        MaterialManager.registerMaterials();
         SeptemTweaks.LOG.info("[SeptemTweaks]: Load Complete.");
     }
 
@@ -77,5 +89,6 @@ public class SeptemTweaks {
     // register server commands in this event handler (Remove if not needed)
     public void serverStarting(FMLServerStartingEvent event) {
         proxy.serverStarting(event);
+        MaterialManager.registerTinkersChanges();
     }
 }

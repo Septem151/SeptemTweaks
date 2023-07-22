@@ -7,6 +7,7 @@ import java.util.List;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import com.rwtema.extrautils.ExtraUtils;
@@ -92,9 +93,40 @@ public class STRecipes {
         furnaceManager.addRecipe(new FurnaceRecipe("logWood", new ItemWrapper(Items.coal, 1), 1.0F));
         furnaceManager.addRecipe(new FurnaceRecipe("woodRubber", new ItemWrapper(Items.coal, 1), 1.0F));
 
+        // CRAFT VANILLA BLACKLIST
+        List<Item> vanillaItems = new ArrayList<>();
+        Collections.addAll(
+            vanillaItems,
+            Items.wooden_pickaxe,
+            Items.stone_pickaxe,
+            Items.iron_pickaxe,
+            Items.golden_pickaxe,
+            Items.diamond_pickaxe,
+            Items.wooden_axe,
+            Items.stone_axe,
+            Items.iron_axe,
+            Items.golden_axe,
+            Items.diamond_axe,
+            Items.wooden_shovel,
+            Items.stone_shovel,
+            Items.iron_shovel,
+            Items.golden_shovel,
+            Items.diamond_shovel,
+            Items.wooden_hoe,
+            Items.stone_hoe,
+            Items.iron_hoe,
+            Items.golden_hoe,
+            Items.diamond_hoe,
+            Items.wooden_sword,
+            Items.stone_sword,
+            Items.iron_sword,
+            Items.golden_sword,
+            Items.diamond_sword);
+        vanillaItems.forEach(item -> craftManager.addBlacklistedResult(new ItemWrapper(item)));
+
         // CRAFT THERMAL EXPANSION BLACKLIST
         craftManager.addBlacklistedResults(ItemHelper.getItemsMetaRange("ThermalExpansion", "Frame", 0, 3));
-        craftManager.addBlacklistedResults(ItemHelper.getItemsMetaRange("ThermalExpansion", "Machine", 0, 1));
+        craftManager.addBlacklistedResults(ItemHelper.getItemsMetaRange("ThermalExpansion", "Machine", 0, 5));
 
         // CRAFT EXTRA UTILITIES BLACKLIST
         craftManager.addBlacklistedResults(ItemHelper.getItemsMetaRange("ExtraUtilities", "decorativeBlock2", 10, 11));
@@ -253,6 +285,36 @@ public class STRecipes {
                     new ItemStack(TinkerSmeltery.smeltery, 1, 2), 'M', "thermalexpansion:machineFrame", 'G',
                     "gearBronze", 'C', TEItems.powerCoilGold }));
         STRecipes.upgradeMachineRecipes(BlockMachine.pulverizer);
+        craftManager.addRecipe(
+            new RecipeMachine(
+                BlockMachine.sawmill,
+                BlockMachine.defaultAugments,
+                new Object[] { " A ", "PMP", "GCG", 'A', new ItemStack(TinkerTools.hatchetHead, 1, 2), 'P', "plankWood",
+                    'M', "thermalexpansion:machineFrame", 'G', "gearBronze", 'C', TEItems.powerCoilGold }));
+        STRecipes.upgradeMachineRecipes(BlockMachine.sawmill);
+        craftManager.addRecipe(
+            new RecipeMachine(
+                BlockMachine.smelter,
+                BlockMachine.defaultAugments,
+                new Object[] { "GES", "IMI", "DCD", 'G', STItems.goldCoil, 'E', STItems.electrumCoil, 'S',
+                    STItems.silverCoil, 'I', "ingotSteel", 'M', "thermalexpansion:machineFrame", 'D', "gearDiamond",
+                    'C', TEItems.powerCoilGold }));
+        STRecipes.upgradeMachineRecipes(BlockMachine.smelter);
+        craftManager.addRecipe(
+            new RecipeMachine(
+                BlockMachine.crucible,
+                BlockMachine.defaultAugments,
+                new Object[] { " T ", "BMB", "DCD", 'T', BlockTank.tankBasic, 'B', new ItemStack(Blocks.nether_brick),
+                    'M', "thermalexpansion:machineFrame", 'D', "gearDiamond", 'C', TEItems.powerCoilGold }));
+        STRecipes.upgradeMachineRecipes(BlockMachine.crucible);
+        craftManager.addRecipe(
+            new RecipeMachine(
+                BlockMachine.transposer,
+                BlockMachine.defaultAugments,
+                new Object[] { "BTB", "GMG", "XCX", 'B', Items.bucket, 'T', BlockTank.tankBasic, 'G',
+                    "blockGlassHardened", 'M', "thermalexpansion:machineFrame", 'X', "gearDiamond", 'C',
+                    TEItems.powerCoilGold }));
+        STRecipes.upgradeMachineRecipes(BlockMachine.transposer);
     }
 
     private static void upgradeMachineRecipes(ItemStack machine) {

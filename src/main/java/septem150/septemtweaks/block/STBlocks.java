@@ -6,6 +6,8 @@ import java.util.Comparator;
 import java.util.List;
 
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
+import net.minecraftforge.oredict.OreDictionary;
 
 import septem150.septemtweaks.SeptemCreativeTab;
 import septem150.septemtweaks.api.RegistryEntry;
@@ -28,6 +30,8 @@ public class STBlocks {
     private STBlocks() {}
 
     public static void preInit() {
+        // We have to register Obsidian to the oredict, because for some reason it's not by default
+        OreDictionary.registerOre("obsidian", Blocks.obsidian);
         // registerBlocks();
     }
 
