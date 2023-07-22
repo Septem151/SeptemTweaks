@@ -12,8 +12,11 @@ import net.minecraft.item.ItemStack;
 
 import com.rwtema.extrautils.ExtraUtils;
 
+import cofh.core.util.crafting.RecipeAugmentable;
 import cofh.thermalexpansion.block.TEBlocks;
+import cofh.thermalexpansion.block.device.BlockDevice;
 import cofh.thermalexpansion.block.machine.BlockMachine;
+import cofh.thermalexpansion.block.plate.BlockPlate;
 import cofh.thermalexpansion.block.simple.BlockFrame;
 import cofh.thermalexpansion.block.simple.BlockGlass;
 import cofh.thermalexpansion.block.tank.BlockTank;
@@ -21,6 +24,7 @@ import cofh.thermalexpansion.item.TEItems;
 import cofh.thermalexpansion.util.crafting.RecipeMachine;
 import cofh.thermalexpansion.util.crafting.RecipeMachineUpgrade;
 import cofh.thermalexpansion.util.crafting.SmelterManager;
+import cofh.thermalfoundation.item.TFItems;
 import septem150.septemtweaks.item.STItems;
 import septem150.septemtweaks.recipe.furnace.FurnaceManager;
 import septem150.septemtweaks.recipe.furnace.FurnaceRecipe;
@@ -126,7 +130,8 @@ public class STRecipes {
 
         // CRAFT THERMAL EXPANSION BLACKLIST
         craftManager.addBlacklistedResults(ItemHelper.getItemsMetaRange("ThermalExpansion", "Frame", 0, 3));
-        craftManager.addBlacklistedResults(ItemHelper.getItemsMetaRange("ThermalExpansion", "Machine", 0, 5));
+        craftManager.addBlacklistedResults(ItemHelper.getItemsMetaRange("ThermalExpansion", "Machine", 0, 11));
+        craftManager.addBlacklistedResults(ItemHelper.getItemsMetaRange("ThermalExpansion", "Device", 2, 6));
 
         // CRAFT EXTRA UTILITIES BLACKLIST
         craftManager.addBlacklistedResults(ItemHelper.getItemsMetaRange("ExtraUtilities", "decorativeBlock2", 10, 11));
@@ -315,6 +320,82 @@ public class STRecipes {
                     "blockGlassHardened", 'M', "thermalexpansion:machineFrame", 'X', "gearDiamond", 'C',
                     TEItems.powerCoilGold }));
         STRecipes.upgradeMachineRecipes(BlockMachine.transposer);
+        craftManager.addRecipe(
+            new RecipeMachine(
+                BlockMachine.precipitator,
+                BlockMachine.defaultAugments,
+                new Object[] { "BTB", "WMW", "XCX", 'B', TFItems.rodBlizz, 'T', BlockTank.tankBasic, 'W',
+                    "blockClothRock", 'M', "thermalexpansion:machineFrame", 'X', "gearBronze", 'C',
+                    TEItems.powerCoilGold }));
+        STRecipes.upgradeMachineRecipes(BlockMachine.precipitator);
+        craftManager.addRecipe(
+            new RecipeMachine(
+                BlockMachine.extruder,
+                BlockMachine.defaultAugments,
+                new Object[] { "TBT", "HMH", "XSX", 'T', BlockTank.tankBasic, 'B', Items.bucket, 'H',
+                    "blockGlassHardened", 'M', "thermalexpansion:machineFrame", 'X', "gearBronze", 'S',
+                    TEItems.pneumaticServo }));
+        STRecipes.upgradeMachineRecipes(BlockMachine.extruder);
+        craftManager.addRecipe(
+            new RecipeMachine(
+                BlockMachine.accumulator,
+                BlockMachine.defaultAugments,
+                new Object[] { " T ", "GMG", "XSX", 'T', BlockTank.tankBasic, 'G', "blockGlass", 'M',
+                    "thermalexpansion:machineFrame", 'X', "gearBronze", 'S', TEItems.pneumaticServo }));
+        STRecipes.upgradeMachineRecipes(BlockMachine.accumulator);
+        craftManager.addRecipe(
+            new RecipeMachine(
+                BlockMachine.assembler,
+                BlockMachine.defaultAugments,
+                new Object[] { " T ", "IMI", "XCX", 'T', "craftingTableWood", 'I', "ingotSteel", 'M',
+                    "thermalexpansion:machineFrame", 'X', "gearDiamond", 'C', TEItems.powerCoilGold }));
+        STRecipes.upgradeMachineRecipes(BlockMachine.assembler);
+        craftManager.addRecipe(
+            new RecipeMachine(
+                BlockMachine.charger,
+                BlockMachine.defaultAugments,
+                new Object[] { " E ", "TMT", "XCX", 'E', BlockFrame.frameCellBasic, 'T', TEItems.powerCoilSilver, 'M',
+                    "thermalexpansion:machineFrame", 'X', "gearDiamond", 'C', TEItems.powerCoilGold }));
+        STRecipes.upgradeMachineRecipes(BlockMachine.charger);
+        craftManager.addRecipe(
+            new RecipeMachine(
+                BlockMachine.insolator,
+                BlockMachine.defaultAugments,
+                new Object[] { " L ", "DMD", "XCX", 'L', "gearLumium", 'D',
+                    ItemHelper.fromFriendlyName("MineFactoryReloaded:farmland").itemStack, 'M',
+                    "thermalexpansion:machineFrame", 'X', "gearBronze", 'C', TEItems.powerCoilGold }));
+        STRecipes.upgradeMachineRecipes(BlockMachine.insolator);
+        craftManager.addRecipe(
+            new RecipeAugmentable(
+                BlockDevice.activator,
+                BlockDevice.defaultAugments,
+                new Object[] { " P ", "XTX", "WCW", 'P', BlockPlate.plateImpulse, 'X', "gearTin", 'T',
+                    ExtraUtils.timerBlock, 'W', "chestWood", 'C', TEItems.powerCoilGold }));
+        craftManager.addRecipe(
+            new RecipeAugmentable(
+                BlockDevice.breaker,
+                BlockDevice.defaultAugments,
+                new Object[] { " P ", "XUX", "OSO", 'P', new ItemStack(TinkerTools.pickaxeHead, 1, 16), 'X', "gearTin",
+                    'U', ItemHelper.fromFriendlyName("ExtraUtilities:budoff").itemStack, 'O', "obsidian", 'S',
+                    TEItems.pneumaticServo }));
+        craftManager.addRecipe(
+            new RecipeAugmentable(
+                BlockDevice.collector,
+                BlockDevice.defaultAugments,
+                new Object[] { " H ", "XPX", "ISI", 'H', Blocks.hopper, 'X', "gearTin", 'P', Items.ender_pearl, 'I',
+                    "ingotSteel", 'S', TEItems.pneumaticServo }));
+        craftManager.addRecipe(
+            new RecipeAugmentable(
+                BlockDevice.nullifier,
+                BlockDevice.defaultAugments,
+                new Object[] { "GGG", "XTX", "ISI", 'G', "blockGlassHardened", 'T', ExtraUtils.trashCan, 'X', "gearTin",
+                    'I', "ingotSteel", 'S', TEItems.pneumaticServo }));
+        craftManager.addRecipe(
+            new RecipeAugmentable(
+                BlockDevice.buffer,
+                BlockDevice.defaultAugments,
+                new Object[] { "IGI", "XHX", "ISI", 'G', "gearBronze", 'H', Blocks.hopper, 'X', "gearTin", 'I',
+                    "ingotSteel", 'S', TEItems.pneumaticServo }));
     }
 
     private static void upgradeMachineRecipes(ItemStack machine) {
