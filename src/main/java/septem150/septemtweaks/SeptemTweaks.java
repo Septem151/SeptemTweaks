@@ -39,7 +39,8 @@ import septem150.septemtweaks.world.STWorldGen;
         + "after:ClayBucket@[1.2,);"
         + "after:flintmod@[1.4,);"
         + "after:currency@[1.2,);"
-        + "after:UniDict@[2.9.2,);")
+        + "after:UniDict@[2.9.2,);"
+        + "after:OpenBlocks@[1.7.10-1.6,)")
 public class SeptemTweaks {
 
     public static final Logger LOG = LogManager.getLogger(Tags.MODID);

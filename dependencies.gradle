@@ -52,6 +52,7 @@ dependencies {
   implementation(rfg.deobf("curse.maven:ae2-223794:2296430"))
   implementation(rfg.deobf("curse.maven:crafttweaker-239197:2338487"))
   implementation(rfg.deobf("curse.maven:modtweaker-220954:2313730"))
+  compileOnly(rfg.deobf("curse.maven:openblocks-228816:2386734"))
   devOnlyNonPublishable("com.github.GTNewHorizons:NotEnoughItems:2.3.73-GTNH:dev")
   devOnlyNonPublishable(rfg.deobf("curse.maven:neiaddons-63352:2262121"))
   devOnlyNonPublishable(rfg.deobf("curse.maven:ner-225815:2272500"))
