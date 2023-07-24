@@ -225,8 +225,7 @@ public class MaterialManager {
         }
 
         if (Loader.isModLoaded("flintmod")) {
-            ReflectionHelper
-                .setPrivateValue(net.minecraft.item.Item.ToolMaterial.class, FlintItemInit.FLINT, 2, "harvestLevel");
+            FlintItemInit.flintPick.setHarvestLevel("pickaxe", 2);
         }
         registerTinkersChanges();
     }
