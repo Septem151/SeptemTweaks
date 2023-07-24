@@ -80,7 +80,7 @@ public class STRecipes {
         }
 
         if (Loader.isModLoaded("ExtraUtilities")) {
-            compressedCobblestone1x = "compresedCobblestone1x";
+            compressedCobblestone1x = "compressedCobblestone1x";
             // blockGlassReinforced = new ItemStack(ExtraUtils.decorative2, 1, 10);
             blockGlassReinforced = ItemHelper.fromFriendlyName("ExtraUtilities:decorativeBlock2:10").itemStack;
             // blockGlassResonant = new ItemStack(ExtraUtils.decorative2, 1, 11);
