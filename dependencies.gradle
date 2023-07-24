@@ -45,7 +45,7 @@ dependencies {
   runtimeOnlyNonPublishable(rfg.deobf("curse.maven:mfr-66672:2366150"))
   runtimeOnlyNonPublishable(rfg.deobf("curse.maven:extrautilities-225561:2264384"))
   runtimeOnlyNonPublishable(rfg.deobf("curse.maven:claybuckets-242568:2293402"))
-  runtimeOnlyNonPublishable(rfg.deobf("curse.maven:flinttools-236022:2316935"))
+  devOnlyNonPublishable(rfg.deobf("curse.maven:flinttools-236022:2316935"))
   runtimeOnlyNonPublishable(rfg.deobf("curse.maven:chisel-235279:2287442"))
   runtimeOnlyNonPublishable(rfg.deobf("curse.maven:ae2-223794:2296430"))
   runtimeOnlyNonPublishable(rfg.deobf("curse.maven:harvestcraft-221857:2270206"))

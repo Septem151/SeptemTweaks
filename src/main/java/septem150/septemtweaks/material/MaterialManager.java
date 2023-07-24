@@ -7,6 +7,8 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
+import com.flintmod.items.FlintItemInit;
+
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.relauncher.ReflectionHelper;
 import septem150.septemtweaks.SeptemTweaks;
@@ -220,6 +222,11 @@ public class MaterialManager {
             }
             SeptemTweaks.LOG
                 .info(String.format("[SeptemTweaks]: Block harvest level after: %d", block.getHarvestLevel(meta)));
+        }
+
+        if (Loader.isModLoaded("flintmod")) {
+            ReflectionHelper
+                .setPrivateValue(net.minecraft.item.Item.ToolMaterial.class, FlintItemInit.FLINT, 2, "harvestLevel");
         }
         registerTinkersChanges();
     }
