@@ -72,11 +72,11 @@ Features in progress for next release:
 
 ## Screenshots
 
-![SeptemTweaks Ore Progression](https://media.forgecdn.net/attachments/699/622/ore_tiers.png "Ore Progression")
+![SeptemTweaks Ore Progression](https://raw.githubusercontent.com/Septem151/SeptemTweaks/screenshots/ore_tiers.png "Ore Progression")
 
 _Ore Progression shown with the various blocks possible to mine at the given tool material. Blocks on the far-right of a tier indicate the material that's used to mine blocks in the next tier below. For example, Bronze in the stone tier is capable of mining every block in the Bronze tier as well as the tiers before._
 
-![SeptemTweaks Thermal Recipe Modifications](https://media.forgecdn.net/attachments/699/654/recipes.png "Thermal Recipe Modifications")
+![SeptemTweaks Thermal Recipe Modifications](https://raw.githubusercontent.com/Septem151/SeptemTweaks/screenshots/thermal_recipes.png "Thermal Recipe Modifications")
 
 _Various recipes that have been modified by this mod. Some item recipes not shown, for example the addition of gold/silver/electrum wire coils as intermediary crafting materials for thermal coils._
 
