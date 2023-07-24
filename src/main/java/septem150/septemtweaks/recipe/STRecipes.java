@@ -10,8 +10,6 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-import com.rwtema.extrautils.ExtraUtils;
-
 import cofh.core.util.crafting.RecipeAugmentable;
 import cofh.thermalexpansion.block.TEBlocks;
 import cofh.thermalexpansion.block.device.BlockDevice;
@@ -25,6 +23,7 @@ import cofh.thermalexpansion.util.crafting.RecipeMachine;
 import cofh.thermalexpansion.util.crafting.RecipeMachineUpgrade;
 import cofh.thermalexpansion.util.crafting.SmelterManager;
 import cofh.thermalfoundation.item.TFItems;
+import cpw.mods.fml.common.Loader;
 import septem150.septemtweaks.item.STItems;
 import septem150.septemtweaks.recipe.furnace.FurnaceManager;
 import septem150.septemtweaks.recipe.furnace.FurnaceRecipe;
@@ -40,11 +39,64 @@ public class STRecipes {
     private static final FurnaceManager furnaceManager = FurnaceManager.getInstance();
     private static final CraftManager craftManager = CraftManager.getInstance();
 
+    private static Object itemRubber = "slimeball";
+    private static Object compressedCobblestone1x = "cobblestone";
+    private static Object blockGlassReinforced = "blockGlassHardened";
+    private static Object blockGlassResonant = "blockGlassHardened";
+    private static Object gearAdvanced = "gearLead";
+    private static Object dirtFertile = Blocks.dirt;
+    private static Object blockTimer = "blockRedstone";
+    private static Object blockBUD = "blockRedstone";
+
     private STRecipes() {}
 
     public static void initRecipes() {
         // FURNACE MODS WHITELIST
-        furnaceManager.addWhitelistedMods("harvestcraft", "claybucket");
+        if (Loader.isModLoaded("harvestcraft")) {
+            furnaceManager.addWhitelistedMod("harvestcraft");
+        }
+
+        if (Loader.isModLoaded("claybucket")) {
+            furnaceManager.addWhitelistedMod("claybucket");
+        }
+
+        if (Loader.isModLoaded("MineFactoryReloaded")) {
+            itemRubber = "itemRubber";
+            dirtFertile = ItemHelper.fromFriendlyName("MineFactoryReloaded:farmland").itemStack;
+            // FURNACE MINEFACTORY RELOADED WHITELIST
+            List<String> mfrFurnaceItems = new ArrayList<>();
+            Collections.addAll(
+                mfrFurnaceItems,
+                "rubber.raw",
+                "meat.nugget.raw",
+                "plastic.sheet",
+                "meat.ingot.raw",
+                "rubberwood.log",
+                "pinkslime.block");
+            mfrFurnaceItems.forEach(
+                itemName -> furnaceManager.addWhitelistedInput(
+                    ItemHelper.fromFriendlyName(String.format("MineFactoryReloaded:%s", itemName))));
+            furnaceManager.addWhitelistedInputs(ItemHelper.getItemsMetaRange("MineFactoryReloaded", "stone", 0, 3));
+        }
+
+        if (Loader.isModLoaded("ExtraUtilities")) {
+            compressedCobblestone1x = "compresedCobblestone1x";
+            // blockGlassReinforced = new ItemStack(ExtraUtils.decorative2, 1, 10);
+            blockGlassReinforced = ItemHelper.fromFriendlyName("ExtraUtilities:decorativeBlock2:10").itemStack;
+            // blockGlassResonant = new ItemStack(ExtraUtils.decorative2, 1, 11);
+            blockGlassResonant = ItemHelper.fromFriendlyName("ExtraUtilities:decorativeBlock2:11").itemStack;
+            // blockTimer = ExtraUtils.timerBlock;
+            blockTimer = ItemHelper.fromFriendlyName("ExtraUtilities:timer").itemStack;
+            // blockBUD = ItemHelper.fromFriendlyName("ExtraUtilities:budoff").itemStack;
+            blockBUD = ItemHelper.fromFriendlyName("ExtraUtilities:budoff").itemStack;
+            // CRAFT EXTRA UTILITIES BLACKLIST
+            craftManager
+                .addBlacklistedResults(ItemHelper.getItemsMetaRange("ExtraUtilities", "decorativeBlock2", 10, 11));
+        }
+
+        if (Loader.isModLoaded("BuildCraft|Core")) {
+            gearAdvanced = "gearDiamond";
+        }
 
         // FURNACE VANILLA WHITELIST
         furnaceManager.addWhitelistedInputs(
@@ -77,21 +129,6 @@ public class STRecipes {
             itemName -> furnaceManager
                 .addWhitelistedInput(ItemHelper.fromFriendlyName(String.format("TConstruct:%s", itemName))));
         furnaceManager.addWhitelistedInputs(ItemHelper.getItemsMetaRange("TConstruct", "CraftedSoil", 0, 3));
-
-        // FURNACE MINEFACTORY RELOADED WHITELIST
-        List<String> mfrFurnaceItems = new ArrayList<>();
-        Collections.addAll(
-            mfrFurnaceItems,
-            "rubber.raw",
-            "meat.nugget.raw",
-            "plastic.sheet",
-            "meat.ingot.raw",
-            "rubberwood.log",
-            "pinkslime.block");
-        mfrFurnaceItems.forEach(
-            itemName -> furnaceManager
-                .addWhitelistedInput(ItemHelper.fromFriendlyName(String.format("MineFactoryReloaded:%s", itemName))));
-        furnaceManager.addWhitelistedInputs(ItemHelper.getItemsMetaRange("MineFactoryReloaded", "stone", 0, 3));
 
         // FURNACE OREDICT RECIPES
         furnaceManager.addRecipe(new FurnaceRecipe("logWood", new ItemWrapper(Items.coal, 1), 1.0F));
@@ -133,12 +170,9 @@ public class STRecipes {
         craftManager.addBlacklistedResults(ItemHelper.getItemsMetaRange("ThermalExpansion", "Machine", 0, 11));
         craftManager.addBlacklistedResults(ItemHelper.getItemsMetaRange("ThermalExpansion", "Device", 2, 6));
 
-        // CRAFT EXTRA UTILITIES BLACKLIST
-        craftManager.addBlacklistedResults(ItemHelper.getItemsMetaRange("ExtraUtilities", "decorativeBlock2", 10, 11));
-
         // CRAFT CUSTOM RECIPES
         craftManager
-            .addRecipe(STItems.glassFrame.wrapped(), "RGR", "G G", "RGR", 'R', "itemRubber", 'G', "blockGlassHardened");
+            .addRecipe(STItems.glassFrame.wrapped(), "RGR", "G G", "RGR", 'R', itemRubber, 'G', "blockGlassHardened");
         craftManager.addRecipe(STItems.goldCoil.wrapped(), "III", "ISI", "III", 'I', "ingotGold", 'S', "stickWood");
         craftManager.addRecipe(STItems.silverCoil.wrapped(), "III", "ISI", "III", 'I', "ingotSilver", 'S', "stickWood");
         craftManager
@@ -149,7 +183,7 @@ public class STRecipes {
             "CFC",
             "CCC",
             'C',
-            "compressedCobblestone1x",
+            compressedCobblestone1x,
             'F',
             Items.flint);
         craftManager.replaceRecipes(
@@ -257,7 +291,7 @@ public class STRecipes {
             'I',
             "ingotAlumite",
             'G',
-            new ItemStack(ExtraUtils.decorative2, 1, 10),
+            blockGlassReinforced,
             'X',
             "gearSignalum",
             'F',
@@ -270,7 +304,7 @@ public class STRecipes {
             'I',
             "ingotManyullyn",
             'G',
-            new ItemStack(ExtraUtils.decorative2, 1, 11),
+            blockGlassResonant,
             'X',
             "gearEnderium",
             'F',
@@ -302,22 +336,22 @@ public class STRecipes {
                 BlockMachine.smelter,
                 BlockMachine.defaultAugments,
                 new Object[] { "GES", "IMI", "DCD", 'G', STItems.goldCoil, 'E', STItems.electrumCoil, 'S',
-                    STItems.silverCoil, 'I', "ingotSteel", 'M', "thermalexpansion:machineFrame", 'D', "gearDiamond",
-                    'C', TEItems.powerCoilGold }));
+                    STItems.silverCoil, 'I', "ingotSteel", 'M', "thermalexpansion:machineFrame", 'D', gearAdvanced, 'C',
+                    TEItems.powerCoilGold }));
         STRecipes.upgradeMachineRecipes(BlockMachine.smelter);
         craftManager.addRecipe(
             new RecipeMachine(
                 BlockMachine.crucible,
                 BlockMachine.defaultAugments,
                 new Object[] { " T ", "BMB", "DCD", 'T', BlockTank.tankBasic, 'B', new ItemStack(Blocks.nether_brick),
-                    'M', "thermalexpansion:machineFrame", 'D', "gearDiamond", 'C', TEItems.powerCoilGold }));
+                    'M', "thermalexpansion:machineFrame", 'D', gearAdvanced, 'C', TEItems.powerCoilGold }));
         STRecipes.upgradeMachineRecipes(BlockMachine.crucible);
         craftManager.addRecipe(
             new RecipeMachine(
                 BlockMachine.transposer,
                 BlockMachine.defaultAugments,
                 new Object[] { "BTB", "GMG", "XCX", 'B', Items.bucket, 'T', BlockTank.tankBasic, 'G',
-                    "blockGlassHardened", 'M', "thermalexpansion:machineFrame", 'X', "gearDiamond", 'C',
+                    "blockGlassHardened", 'M', "thermalexpansion:machineFrame", 'X', gearAdvanced, 'C',
                     TEItems.powerCoilGold }));
         STRecipes.upgradeMachineRecipes(BlockMachine.transposer);
         craftManager.addRecipe(
@@ -348,36 +382,34 @@ public class STRecipes {
                 BlockMachine.assembler,
                 BlockMachine.defaultAugments,
                 new Object[] { " T ", "IMI", "XCX", 'T', "craftingTableWood", 'I', "ingotSteel", 'M',
-                    "thermalexpansion:machineFrame", 'X', "gearDiamond", 'C', TEItems.powerCoilGold }));
+                    "thermalexpansion:machineFrame", 'X', gearAdvanced, 'C', TEItems.powerCoilGold }));
         STRecipes.upgradeMachineRecipes(BlockMachine.assembler);
         craftManager.addRecipe(
             new RecipeMachine(
                 BlockMachine.charger,
                 BlockMachine.defaultAugments,
                 new Object[] { " E ", "TMT", "XCX", 'E', BlockFrame.frameCellBasic, 'T', TEItems.powerCoilSilver, 'M',
-                    "thermalexpansion:machineFrame", 'X', "gearDiamond", 'C', TEItems.powerCoilGold }));
+                    "thermalexpansion:machineFrame", 'X', gearAdvanced, 'C', TEItems.powerCoilGold }));
         STRecipes.upgradeMachineRecipes(BlockMachine.charger);
         craftManager.addRecipe(
             new RecipeMachine(
                 BlockMachine.insolator,
                 BlockMachine.defaultAugments,
-                new Object[] { " L ", "DMD", "XCX", 'L', "gearLumium", 'D',
-                    ItemHelper.fromFriendlyName("MineFactoryReloaded:farmland").itemStack, 'M',
+                new Object[] { " L ", "DMD", "XCX", 'L', "gearLumium", 'D', dirtFertile, 'M',
                     "thermalexpansion:machineFrame", 'X', "gearBronze", 'C', TEItems.powerCoilGold }));
         STRecipes.upgradeMachineRecipes(BlockMachine.insolator);
         craftManager.addRecipe(
             new RecipeAugmentable(
                 BlockDevice.activator,
                 BlockDevice.defaultAugments,
-                new Object[] { " P ", "XTX", "WCW", 'P', BlockPlate.plateImpulse, 'X', "gearTin", 'T',
-                    ExtraUtils.timerBlock, 'W', "chestWood", 'C', TEItems.powerCoilGold }));
+                new Object[] { " P ", "XTX", "WCW", 'P', BlockPlate.plateImpulse, 'X', "gearTin", 'T', blockTimer, 'W',
+                    "chestWood", 'C', TEItems.powerCoilGold }));
         craftManager.addRecipe(
             new RecipeAugmentable(
                 BlockDevice.breaker,
                 BlockDevice.defaultAugments,
                 new Object[] { " P ", "XUX", "OSO", 'P', new ItemStack(TinkerTools.pickaxeHead, 1, 16), 'X', "gearTin",
-                    'U', ItemHelper.fromFriendlyName("ExtraUtilities:budoff").itemStack, 'O', "obsidian", 'S',
-                    TEItems.pneumaticServo }));
+                    'U', blockBUD, 'O', "obsidian", 'S', TEItems.pneumaticServo }));
         craftManager.addRecipe(
             new RecipeAugmentable(
                 BlockDevice.collector,
@@ -388,7 +420,7 @@ public class STRecipes {
             new RecipeAugmentable(
                 BlockDevice.nullifier,
                 BlockDevice.defaultAugments,
-                new Object[] { "GGG", "XTX", "ISI", 'G', "blockGlassHardened", 'T', ExtraUtils.trashCan, 'X', "gearTin",
+                new Object[] { "GGG", "XTX", "ISI", 'G', "blockGlassHardened", 'T', Items.lava_bucket, 'X', "gearTin",
                     'I', "ingotSteel", 'S', TEItems.pneumaticServo }));
         craftManager.addRecipe(
             new RecipeAugmentable(
@@ -409,33 +441,33 @@ public class STRecipes {
             new RecipeMachineUpgrade(
                 2,
                 RecipeMachineUpgrade.getMachineLevel(machine, 2),
-                new Object[] { "IXI", "GMG", "IGI", 'I', "ingotAlumite", 'G',
-                    new ItemStack(ExtraUtils.decorative2, 1, 10), 'X', "gearSignalum", 'M',
-                    RecipeMachineUpgrade.getMachineLevel(machine, 1) }));
+                new Object[] { "IXI", "GMG", "IGI", 'I', "ingotAlumite", 'G', blockGlassReinforced, 'X', "gearSignalum",
+                    'M', RecipeMachineUpgrade.getMachineLevel(machine, 1) }));
         craftManager.addRecipe(
             new RecipeMachineUpgrade(
                 3,
                 RecipeMachineUpgrade.getMachineLevel(machine, 3),
-                new Object[] { "IXI", "GMG", "IGI", 'I', "ingotManyullyn", 'G',
-                    new ItemStack(ExtraUtils.decorative2, 1, 11), 'X', "gearEnderium", 'M',
-                    RecipeMachineUpgrade.getMachineLevel(machine, 2) }));
+                new Object[] { "IXI", "GMG", "IGI", 'I', "ingotManyullyn", 'G', blockGlassResonant, 'X', "gearEnderium",
+                    'M', RecipeMachineUpgrade.getMachineLevel(machine, 2) }));
     }
 
     public static void registerRecipes() {
         furnaceManager.registerRecipes();
         craftManager.registerRecipes();
-        SmelterManager.addAlloyRecipe(
-            6000,
-            BlockGlass.glassHardened,
-            new ItemStack(Items.diamond),
-            new ItemStack(ExtraUtils.decorative2, 1, 10));
-        SmelterManager.addAlloyRecipe(
-            8000,
-            new ItemStack(ExtraUtils.decorative2, 1, 10),
-            ItemHelper.getOreDictItems("dustCobalt")
-                .get(0)
-                .copy(),
-            new ItemStack(ExtraUtils.decorative2, 1, 11));
+        if (Loader.isModLoaded("ExtraUtilities")) {
+            SmelterManager.addAlloyRecipe(
+                6000,
+                BlockGlass.glassHardened,
+                new ItemStack(Items.diamond),
+                (ItemStack) blockGlassReinforced);
+            SmelterManager.addAlloyRecipe(
+                8000,
+                (ItemStack) blockGlassReinforced,
+                ItemHelper.getOreDictItems("dustCobalt")
+                    .get(0)
+                    .copy(),
+                (ItemStack) blockGlassResonant);
+        }
         ItemStack obsidianDust4 = ItemHelper.getOreDictItems("dustObsidian")
             .get(0)
             .copy();

@@ -68,6 +68,8 @@ public class FurnaceManager {
     }
 
     public void registerRecipes() {
+        // Add all existing recipes to TE Furnace first before we remove furnace recipes
+        cofh.thermalexpansion.util.crafting.FurnaceManager.loadRecipes();
         Map<ItemStack, ItemStack> recipes = FurnaceRecipes.smelting()
             .getSmeltingList();
         for (Iterator<Map.Entry<ItemStack, ItemStack>> entries = recipes.entrySet()

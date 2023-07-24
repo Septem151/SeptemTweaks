@@ -7,7 +7,8 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-import modtweaker2.mods.tconstruct.handlers.ToolStats;
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.relauncher.ReflectionHelper;
 import septem150.septemtweaks.SeptemTweaks;
 import septem150.septemtweaks.util.ItemHelper;
 import septem150.septemtweaks.util.ItemWrapper;
@@ -128,6 +129,11 @@ public class MaterialManager {
         for (Map.Entry<String, Integer> entry : blockHarvestLevels.entrySet()) {
             String oreDict = entry.getKey();
             int harvestLevel = entry.getValue();
+            if (!OreDictionary.doesOreNameExist(oreDict)) {
+                SeptemTweaks.LOG
+                    .info(String.format("[SeptemTweaks]: Skipping oreDict %s as it does not exist", oreDict));
+                continue;
+            }
             SeptemTweaks.LOG.info(
                 String.format(
                     "[SeptemTweaks]: Iterating on oreDict: %s giving Harvest Level: %d",
@@ -165,17 +171,23 @@ public class MaterialManager {
         }
 
         blockHarvestLevels.clear();
-        blockHarvestLevels.put("harvestcraft:salt", 3); // Salt
-        blockHarvestLevels.put("harvestcraft:spamcompressedsaltBlockalt", 3); // Salt
-        blockHarvestLevels.put("NetherOres:tile.netherores.ore.1:13", 3); // Salt
-        blockHarvestLevels.put("NetherOres:tile.netherores.ore.0:13", 3); // Ruby
-        blockHarvestLevels.put("NetherOres:tile.netherores.ore.0:14", 3); // Peridot
-        blockHarvestLevels.put("NetherOres:tile.netherores.ore.0:15", 3); // Sapphire
-        blockHarvestLevels.put("NetherOres:tile.netherores.ore.1:11", 3); // Amber
-        blockHarvestLevels.put("BiomesOPlenty:gemOre", 3); // Amethyst
-        blockHarvestLevels.put("BiomesOPlenty:gemOre:1", 3); // Amethyst
+        if (Loader.isModLoaded("harvestcraft")) {
+            blockHarvestLevels.put("harvestcraft:salt", 3); // Salt
+            blockHarvestLevels.put("harvestcraft:spamcompressedsaltBlockalt", 3); // Salt
+        }
+        if (Loader.isModLoaded("NetherOres")) {
+            blockHarvestLevels.put("NetherOres:tile.netherores.ore.1:13", 3); // Salt
+            blockHarvestLevels.put("NetherOres:tile.netherores.ore.0:13", 3); // Ruby
+            blockHarvestLevels.put("NetherOres:tile.netherores.ore.0:14", 3); // Peridot
+            blockHarvestLevels.put("NetherOres:tile.netherores.ore.0:15", 3); // Sapphire
+            blockHarvestLevels.put("NetherOres:tile.netherores.ore.1:11", 3); // Amber
+        }
+        if (Loader.isModLoaded("BiomesOPlenty")) {
+            blockHarvestLevels.put("BiomesOPlenty:gemOre", 3); // Amethyst
+            blockHarvestLevels.put("BiomesOPlenty:gemOre:1", 3); // Amethyst
+        }
 
-        SeptemTweaks.LOG.info("[SeptemTweaks]: Iterating over blocks not in oredicts to change block Harvest Levels");
+        SeptemTweaks.LOG.info("[SeptemTweaks]: Iterating over non-oredict blocks to change Harvest Levels");
         for (Map.Entry<String, Integer> entry : blockHarvestLevels.entrySet()) {
             SeptemTweaks.LOG.info(
                 String.format(
@@ -209,6 +221,7 @@ public class MaterialManager {
             SeptemTweaks.LOG
                 .info(String.format("[SeptemTweaks]: Block harvest level after: %d", block.getHarvestLevel(meta)));
         }
+        registerTinkersChanges();
     }
 
     public static void registerTinkersChanges() {
@@ -232,6 +245,11 @@ public class MaterialManager {
         toolHarvestLevels.put("Manyullyn", 7);
         toolHarvestLevels.put("Platinum", 8);
 
+        Map<String, Integer> tconMapping = new HashMap<>();
+        for (Map.Entry<Integer, ToolMaterial> entry : TConstructRegistry.toolMaterials.entrySet()) {
+            tconMapping.put(entry.getValue().materialName, entry.getKey());
+        }
+
         SeptemTweaks.LOG.info("[SeptemTweaks]: Iterating over tool materials to change tool Harvest Levels");
         for (Map.Entry<String, Integer> entry : toolHarvestLevels.entrySet()) {
             String toolOre = entry.getKey();
@@ -242,22 +260,18 @@ public class MaterialManager {
                     "[SeptemTweaks]: Iterating over tool material: %s giving Harvest Level: %d",
                     toolOre,
                     harvestLevel));
-            if (material == null) {
-                SeptemTweaks.LOG.error("[SeptemTweaks]: Material before was null! Attempting to continue anyway.");
-            } else {
-                SeptemTweaks.LOG
-                    .info(String.format("[SeptemTweaks]: Harvest Level Before: %d", material.harvestLevel()));
+            if (material == null || !tconMapping.containsKey(toolOre)) {
+                SeptemTweaks.LOG.error("[SeptemTweaks]: Material before was null! Unsure what to do. Skipping entry.");
+                continue;
             }
-            ToolStats.setHarvestLevel(toolOre, harvestLevel);
-            material = TConstructRegistry.getMaterial(toolOre);
-            if (material == null) {
-                SeptemTweaks.LOG.error("[SeptemTweaks]: Material after was null! Attempting to continue anyway.");
-                SeptemTweaks.LOG.info(String.format("[SeptemTweaks]: Harvest Level After: Hopefully %d", harvestLevel));
-            } else {
-                SeptemTweaks.LOG
-                    .info(String.format("[SeptemTweaks]: Harvest Level After: %d", material.harvestLevel()));
-            }
+            int materialId = tconMapping.get(toolOre);
+            SeptemTweaks.LOG.info(String.format("[SeptemTweaks]: Harvest Level Before: %d", material.harvestLevel()));
+            // ToolStats.setHarvestLevel(toolOre, harvestLevel);
+            // Remove dependency on ModTweaker, do what they do using Reflection
+            ReflectionHelper.setPrivateValue(ToolMaterial.class, material, harvestLevel, "harvestLevel");
+            TConstructRegistry.toolMaterials.put(materialId, material);
+            TConstructRegistry.toolMaterialStrings.put(toolOre, material);
+            SeptemTweaks.LOG.info(String.format("[SeptemTweaks]: Harvest Level After: %d", material.harvestLevel()));
         }
-
     }
 }
